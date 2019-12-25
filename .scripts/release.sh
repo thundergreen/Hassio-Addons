@@ -39,13 +39,13 @@ for addon in "$@"; do
 
   if [[ "$FORCE_PUSH" = "true" ]] || { [[ "$TRAVIS_BRANCH" = 'master' ]] && [ -z ${TRAVIS_PULL_REQUEST_BRANCH} ]; }; then
     # Push them
-    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+    #echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
     for arch in ${archs}; do
       image_name=${image_template/\{arch\}/$arch}
 
       echo "Push $image_name..."
-      docker push "$image_name:$plugin_version"
-      docker push "$image_name:latest"
+      #docker push "$image_name:$plugin_version"
+      #docker push "$image_name:latest"
       echo "Pushed $image_name"
     done
 

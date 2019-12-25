@@ -21,10 +21,11 @@ env:
 
 install:
   - export PATH="${HOME}/bin:${PATH}"
-  - export FORCE_PUSH=false
+  - export FORCE_PUSH=true
   - chmod +x .scripts/build.sh
   - curl -L -o hadolint "https://github.com/hadolint/hadolint/releases/download/v1.16.0/hadolint-$(uname -s)-$(uname -m)" && chmod 755 hadolint && mv hadolint ${HOME}/bin/ && hadolint --version
   - curl -L "https://storage.googleapis.com/shellcheck/shellcheck-stable.linux.$(uname -m).tar.xz" | tar -xJv && mv "shellcheck-stable/shellcheck" ${HOME}/bin/ && shellcheck --version
+  - curl -L "https://downloads.dockerslim.com/releases/1.26.1/dist_linux.tar.gz" | tar -xzv && mv "dist_linux/docker-slim" ${HOME}/bin/ && mv "dist_linux/docker-slim-sensor" ${HOME}/bin/ && docker-slim --version
 
 before_script:
   - docker_violations=$(hadolint $ADDON/Dockerfile | tee /dev/stderr | wc -l)
